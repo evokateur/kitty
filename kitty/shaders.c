@@ -1206,6 +1206,8 @@ create_border_vao(void) {
 
 void
 draw_borders(ssize_t vao_idx, unsigned int num_border_rects, BorderRect *rect_buf, bool rect_data_is_dirty, color_type active_window_bg, unsigned int num_visible_windows, bool all_windows_have_same_bg, OSWindow *w) {
+    // disable border rendering to prevent segfault on Intel HD 3000 GPU (Gen6 architecture, circa 2011)
+    return;
     float background_opacity = effective_os_window_alpha(w);
     if (!num_border_rects) return;
     bind_program(BORDERS_PROGRAM); bind_vertex_array(vao_idx);
