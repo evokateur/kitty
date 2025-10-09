@@ -137,6 +137,10 @@ Detailed list of changes
 0.43.2 [future]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+- Allow kitty to read a specified set of environment variables from your
+  login shell at startup using the :opt:`env` directive in kitty.conf
+  (:iss:`9042`)
+
 - Fix a regression in 0.43.0 that caused a black flicker when closing a tab in
   the presence of a background image (:iss:`9060`)
 
@@ -145,7 +149,13 @@ Detailed list of changes
 
 - Fix a regression in the previous release that broke ``goto_session -1``
 
-- Fix rendering broken on ancient GPU drivers that dont support rendering to 16 bit textures (:iss:`9068`)
+- Fix rendering broken on ancient GPU drivers that do not support rendering to 16 bit textures (:iss:`9068`)
+
+- Fix tab bar sometimes showing incorrect tabs when it is filtered to show only
+  tabs from the current session (:iss:`9079`)
+
+- macOS: Workaround for bug in macOS Tahoe that caused OS Windows that are
+  fullscreen to crash kitty when returning from sleep on some machines (:iss:`8983`)
 
 0.43.1 [2025-10-01]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
