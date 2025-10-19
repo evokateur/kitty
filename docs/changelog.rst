@@ -141,8 +141,15 @@ Detailed list of changes
   login shell at startup using the :opt:`env` directive in kitty.conf
   (:iss:`9042`)
 
+- A new option :opt:`draw_window_borders_for_single_window` to force kitty to
+  always draw a window border even when only a single window is present
+  (:pull:`9112`)
+
 - Fix a regression in 0.43.0 that caused a black flicker when closing a tab in
   the presence of a background image (:iss:`9060`)
+
+- Further improvements to rounded corner rendering, especially at low DPI
+  (:pull:`9091`)
 
 - Splits layout: Fix a bug that could cause a corrupted layout in some
   circumstances (:iss:`9059`)
@@ -156,6 +163,18 @@ Detailed list of changes
 
 - macOS: Workaround for bug in macOS Tahoe that caused OS Windows that are
   fullscreen to crash kitty when returning from sleep on some machines (:iss:`8983`)
+
+- Graphics: Fix animated images sometimes not auto playing or auto playing at the wrong start frame if the same image id is used for a subsequent image
+
+- Fix a regression in 0.43.0 that caused high CPU usage when :opt:`disable_ligatures` was set to ``cursor`` and the tab bar was visible (:iss:`9071`)
+
+- macOS: Handle dropping of file promises into kitty in addition to file paths (:pull:`9084`)
+
+- macOS: Fix indeterminate progress bar displayed on dock icon increasing speed when indeterminate progress is set without being cleared first (:iss:`9114`)
+
+- Wayland: Fix ``center-sized`` panels not working on smithay based compositors (:pull:`9117`)
+
+- Add support for Unicode 17
 
 0.43.1 [2025-10-01]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

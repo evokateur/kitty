@@ -211,7 +211,9 @@ def install_grype() -> str:
     data = download_with_retry(url)
     with tarfile.open(fileobj=io.BytesIO(data), mode='r') as tf:
         tf.extract('grype', path=dest, filter='fully_trusted')
-    return os.path.join(dest, 'grype')
+    exe = os.path.join(dest, 'grype')
+    subprocess.check_call([exe, 'db', 'update'])
+    return exe
 
 
 IGNORED_DEPENDENCY_CVES = [
@@ -220,6 +222,8 @@ IGNORED_DEPENDENCY_CVES = [
     'CVE-2025-6069', # DoS in HTMLParser
     # glib
     'CVE-2025-4056', # Only affects Windows, on which we dont run
+    # github.com/nwaples/rardecode/v2
+    'CVE-2025-11579', # rardecode not present in kitty go.sum
 ]
 
 

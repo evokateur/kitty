@@ -324,9 +324,11 @@ class Tab:  # {{{
             if session_base_dir and ser_opts.relocatable:
                 cwd = os.path.relpath(cwd, session_base_dir)
             return cwd
+        most_common_cwd = ''
         cwds = {w.id: make_relative(w.cwd_for_serialization) for g in groups for w in g}
-        from collections import Counter
-        most_common_cwd, _ = Counter(cwds.values()).most_common(1)[0]
+        if cwds:
+            from collections import Counter
+            most_common_cwd, _ = Counter(cwds.values()).most_common(1)[0]
         for i, g in enumerate(groups):
             gw: list[str] = []
             for window in g:
@@ -416,10 +418,15 @@ class Tab:  # {{{
         tm = self.tab_manager_ref()
         if tm is not None:
             ly = self.current_layout
+            opts = get_options()
+            draw_borders = (
+                ly.must_draw_borders or opts.draw_window_borders_for_single_window or
+                (ly.needs_window_borders and self.windows.has_more_than_one_visible_group)
+            )
             self.borders(
                 all_windows=self.windows,
                 current_layout=ly, tab_bar_rects=tm.tab_bar_rects,
-                draw_window_borders=(ly.needs_window_borders and self.windows.num_visble_groups > 1) or ly.must_draw_borders
+                draw_window_borders=draw_borders
             )
 
     def create_layout_object(self, name: str) -> Layout:
